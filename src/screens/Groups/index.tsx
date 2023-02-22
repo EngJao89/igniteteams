@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native';
+import { Container, Title } from './styles';
 
 export function Groups() {
   return(
-    <View>
-      <Text>Grupos de jogos</Text>
-    </View>
+    <Container>
+      <Title>
+        Grupos de jogos
+      </Title>
+    </Container>
   )
 }
