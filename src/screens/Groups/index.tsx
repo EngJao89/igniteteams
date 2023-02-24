@@ -1,11 +1,10 @@
-import * as S from './styles';
+import { Container } from './styles';
+import { Header } from '@components/Header';
 
 export function Groups() {
   return(
-    <S.Container>
-      <S.Title>
-        Grupos de jogos
-      </S.Title>
-    </S.Container>
+    <Container>
+      <Header/>
+    </Container>
   )
 }
