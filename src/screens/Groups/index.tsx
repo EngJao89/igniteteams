@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { FlatList } from 'react-native';
 
 import { Header } from '@components/Header';
