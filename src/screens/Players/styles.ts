@@ -5,7 +5,7 @@ export const Container = styled(SafeAreaView)`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.GRAY_600};
 
-  padding: 32px;
+  padding: 24px;
 `;
 
 export const Form = styled.View`
