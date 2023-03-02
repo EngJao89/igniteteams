@@ -20,7 +20,7 @@ export function Groups() {
 
   return(
     <Container>
-      <Header/>
+      <Header />
 
       <Highlight 
         title="Turmas"
