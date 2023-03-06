@@ -25,13 +25,17 @@ type RouteParams = {
 }
 
 export function Players() {
+  const [isLoading, setIsLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
+  const navigation = useNavigation();
   const route = useRoute();
 
   const { group } = route.params as RouteParams;
+
+  const newPlayerNameInputRef = useRef<TextInput>(null);
 
   async function handleAddPlayer() {
     if(newPlayerName.trim().length === 0) {
@@ -45,6 +49,8 @@ export function Players() {
 
     try {
       await playerAddByGroup(newPlayer, group);
+
+      newPlayerNameInputRef.current?.blur();
 
       setNewPlayerName('');
       fetchPlayersByTeam();
@@ -83,8 +89,13 @@ export function Players() {
 
       <Form>
         <Input 
-          placeholder="Nome da pessoa" 
+          inputRef={newPlayerNameInputRef}
+          placeholder="Nome da pessoa"
+          value={newPlayerName}
+          onChangeText={setNewPlayerName}
           autoCorrect={false}
+          onSubmitEditing={handleAddPlayer}
+          returnKeyType="done"
         />
 
         <ButtonIcon  
