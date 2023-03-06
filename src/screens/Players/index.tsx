@@ -47,6 +47,7 @@ export function Players() {
       await playerAddByGroup(newPlayer, group);
 
       setNewPlayerName('');
+      fetchPlayersByTeam();
     } catch (error) {
       if(error instanceof AppError){
         Alert.alert('Nova pessoa', error.message);
@@ -66,6 +67,10 @@ export function Players() {
       Alert.alert('Pessoas', 'Não foi possível carregar as pessoas do time selecionado.');
     }
   }
+
+  useEffect(() => {
+    fetchPlayersByTeam();
+  },[team])
 
   return(
     <Container>
@@ -109,10 +114,10 @@ export function Players() {
 
       <FlatList 
         data={players}
-        keyExtractor={item => item}
+        keyExtractor={item => item.name}
         renderItem={({ item }) => (
           <PlayerCard 
-            name={item} 
+            name={item.name} 
             onRemove={() => {}}
           />
         )}
