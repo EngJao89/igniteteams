@@ -6,6 +6,7 @@ import { AppError } from '@utils/AppError';
 
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
+import { playersGetByGroupAndTeam } from '@storage/player/playersGetByGroupAndTeam';
 
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
@@ -26,7 +27,7 @@ type RouteParams = {
 export function Players() {
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
   const route = useRoute();
 
@@ -55,6 +56,17 @@ export function Players() {
       }
     }
   }
+
+  async function fetchPlayersByTeam() {
+    try {
+      const playersByTeam = await playersGetByGroupAndTeam(group, team);
+      setPlayers(playersByTeam);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Pessoas', 'Não foi possível carregar as pessoas do time selecionado.');
+    }
+  }
+
   return(
     <Container>
       <Header showBackButton/>
