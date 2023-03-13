@@ -7,9 +7,7 @@ type Props = {
 export function ListEmpty({ message }: Props) {
   return (
     <Container>
-      <Message>
-        {message}
-      </Message>
+      <Message>{message}</Message>
     </Container>
   )
 }
